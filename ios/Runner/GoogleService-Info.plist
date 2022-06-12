@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>394606341104-lsclcvbpmu15d8c2j4sq47kqi9bj6kev.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.394606341104-lsclcvbpmu15d8c2j4sq47kqi9bj6kev</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>394606341104-lkvthc6849d1qtbg7pnufm51leem2vf2.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDD9VnPT0O1sSBGOcFP49VxZUVQTMUUWys</string>
+	<key>GCM_SENDER_ID</key>
+	<string>394606341104</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mycompany.apayo</string>
+	<key>PROJECT_ID</key>
+	<string>apayo-finance</string>
+	<key>STORAGE_BUCKET</key>
+	<string>apayo-finance.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:394606341104:ios:1553d2dbef71a287cfcb35</string>
+</dict>
+</plist>

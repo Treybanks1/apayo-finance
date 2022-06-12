@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "394606341104",
+    "project_id": "apayo-finance",
+    "storage_bucket": "apayo-finance.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:394606341104:android:1933b9a028108cfdcfcb35",
+        "android_client_info": {
+          "package_name": "com.mycompany.apayo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "394606341104-lkvthc6849d1qtbg7pnufm51leem2vf2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.apayo",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "394606341104-fnln9dj2il5ai9dnjv247n6afiareclf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvAtFvxbfUtHpW5UGNUL0fgjKqsXqutDw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "394606341104-fnln9dj2il5ai9dnjv247n6afiareclf.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "394606341104-lsclcvbpmu15d8c2j4sq47kqi9bj6kev.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.apayo"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
