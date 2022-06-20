@@ -1,5 +1,4 @@
 import '../auth/auth_util.dart';
-import '../flutter_flow/flutter_flow_icon_button.dart';
 import '../flutter_flow/flutter_flow_theme.dart';
 import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
@@ -27,20 +26,6 @@ class _LetsLogInWidgetState extends State<LetsLogInWidget> {
         child: AppBar(
           backgroundColor: Colors.white,
           automaticallyImplyLeading: false,
-          leading: FlutterFlowIconButton(
-            borderColor: Colors.transparent,
-            borderRadius: 30,
-            borderWidth: 1,
-            buttonSize: 60,
-            icon: Icon(
-              Icons.arrow_back_rounded,
-              color: Color(0xFF212121),
-              size: 30,
-            ),
-            onPressed: () {
-              print('IconButton pressed ...');
-            },
-          ),
           actions: [],
           elevation: 0,
         ),
@@ -292,8 +277,17 @@ class _LetsLogInWidgetState extends State<LetsLogInWidget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 25, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed(
+                      'sign_in',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 0),
+                        ),
+                      },
+                    );
                   },
                   text: 'Sign in with password',
                   options: FFButtonOptions(
@@ -327,14 +321,31 @@ class _LetsLogInWidgetState extends State<LetsLogInWidget> {
                     ),
                     Padding(
                       padding: EdgeInsetsDirectional.fromSTEB(5, 0, 0, 0),
-                      child: Text(
-                        'Sign up',
-                        style: FlutterFlowTheme.of(context).bodyText1.override(
-                              fontFamily: 'Urbanist',
-                              color: FlutterFlowTheme.of(context).primaryColor,
-                              fontSize: 16,
-                              fontWeight: FontWeight.w500,
-                            ),
+                      child: InkWell(
+                        onTap: () async {
+                          context.pushNamed(
+                            'sign_up',
+                            extra: <String, dynamic>{
+                              kTransitionInfoKey: TransitionInfo(
+                                hasTransition: true,
+                                transitionType: PageTransitionType.fade,
+                                duration: Duration(milliseconds: 0),
+                              ),
+                            },
+                          );
+                        },
+                        child: Text(
+                          'Sign up',
+                          style: FlutterFlowTheme.of(context)
+                              .bodyText1
+                              .override(
+                                fontFamily: 'Urbanist',
+                                color:
+                                    FlutterFlowTheme.of(context).primaryColor,
+                                fontSize: 16,
+                                fontWeight: FontWeight.w500,
+                              ),
+                        ),
                       ),
                     ),
                   ],

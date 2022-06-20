@@ -68,13 +68,13 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       errorBuilder: (context, _) =>
-          appStateNotifier.loggedIn ? HomeWidget() : LetsLogInWidget(),
+          appStateNotifier.loggedIn ? NavBarPage() : LetsLogInWidget(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
           builder: (context, _) =>
-              appStateNotifier.loggedIn ? HomeWidget() : LetsLogInWidget(),
+              appStateNotifier.loggedIn ? NavBarPage() : LetsLogInWidget(),
           routes: [
             FFRoute(
               name: 'Onboarding1',
@@ -114,7 +114,22 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             FFRoute(
               name: 'home',
               path: 'home',
-              builder: (context, params) => HomeWidget(),
+              requireAuth: true,
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'home')
+                  : HomeWidget(),
+            ),
+            FFRoute(
+              name: 'Profile',
+              path: 'profile',
+              builder: (context, params) => params.isEmpty
+                  ? NavBarPage(initialPage: 'Profile')
+                  : ProfileWidget(),
+            ),
+            FFRoute(
+              name: 'Editprofile',
+              path: 'editprofile',
+              builder: (context, params) => EditprofileWidget(),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ).toRoute(appStateNotifier),

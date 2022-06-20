@@ -45,6 +45,10 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
   bool get rememberpass;
 
   @nullable
+  @BuiltValueField(wireName: 'birth_date')
+  int get birthDate;
+
+  @nullable
   @BuiltValueField(wireName: kDocumentReferenceField)
   DocumentReference get reference;
 
@@ -54,7 +58,8 @@ abstract class UserRecord implements Built<UserRecord, UserRecordBuilder> {
     ..photoUrl = ''
     ..uid = ''
     ..phoneNumber = ''
-    ..rememberpass = false;
+    ..rememberpass = false
+    ..birthDate = 0;
 
   static CollectionReference get collection =>
       FirebaseFirestore.instance.collection('user');
@@ -87,6 +92,7 @@ Map<String, dynamic> createUserRecordData({
   DocumentReference cardnumber,
   DocumentReference cardbalance,
   bool rememberpass,
+  int birthDate,
 }) =>
     serializers.toFirestore(
         UserRecord.serializer,
@@ -100,4 +106,5 @@ Map<String, dynamic> createUserRecordData({
           ..cardcompany = cardcompany
           ..cardnumber = cardnumber
           ..cardbalance = cardbalance
-          ..rememberpass = rememberpass));
+          ..rememberpass = rememberpass
+          ..birthDate = birthDate));

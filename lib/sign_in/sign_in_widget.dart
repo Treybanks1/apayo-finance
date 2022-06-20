@@ -7,6 +7,7 @@ import '../flutter_flow/flutter_flow_util.dart';
 import '../flutter_flow/flutter_flow_widgets.dart';
 import 'package:easy_debounce/easy_debounce.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,16 +19,30 @@ class SignInWidget extends StatefulWidget {
 }
 
 class _SignInWidgetState extends State<SignInWidget> {
-  TextEditingController textController1;
-  TextEditingController textController2;
+  TextEditingController emailTextController;
+  TextEditingController passwordTextController;
   bool passwordVisibility;
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    textController1 = TextEditingController();
-    textController2 = TextEditingController();
+    // On page load action.
+    SchedulerBinding.instance?.addPostFrameCallback((_) async {
+      context.pushNamed(
+        'sign_up',
+        extra: <String, dynamic>{
+          kTransitionInfoKey: TransitionInfo(
+            hasTransition: true,
+            transitionType: PageTransitionType.fade,
+            duration: Duration(milliseconds: 0),
+          ),
+        },
+      );
+    });
+
+    emailTextController = TextEditingController();
+    passwordTextController = TextEditingController();
     passwordVisibility = false;
   }
 
@@ -92,44 +107,78 @@ class _SignInWidgetState extends State<SignInWidget> {
                     Expanded(
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
-                        child: TextFormField(
-                          controller: textController1,
-                          onChanged: (_) => EasyDebounce.debounce(
-                            'textController1',
-                            Duration(milliseconds: 2000),
-                            () => setState(() {}),
+                        child: StreamBuilder<List<UserRecord>>(
+                          stream: queryUserRecord(
+                            queryBuilder: (userRecord) => userRecord
+                                .where('email', isEqualTo: currentUserEmail),
+                            singleRecord: true,
                           ),
-                          autofocus: true,
-                          obscureText: false,
-                          decoration: InputDecoration(
-                            labelText: 'Email',
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
+                          builder: (context, snapshot) {
+                            // Customize what your widget looks like when it's loading.
+                            if (!snapshot.hasData) {
+                              return Center(
+                                child: SizedBox(
+                                  width: 50,
+                                  height: 50,
+                                  child: CircularProgressIndicator(
+                                    color: FlutterFlowTheme.of(context)
+                                        .primaryColor,
+                                  ),
+                                ),
+                              );
+                            }
+                            List<UserRecord> textFieldUserRecordList =
+                                snapshot.data;
+                            // Return an empty Container when the document does not exist.
+                            if (snapshot.data.isEmpty) {
+                              return Container();
+                            }
+                            final textFieldUserRecord =
+                                textFieldUserRecordList.isNotEmpty
+                                    ? textFieldUserRecordList.first
+                                    : null;
+                            return TextFormField(
+                              controller: emailTextController,
+                              onChanged: (_) => EasyDebounce.debounce(
+                                'emailTextController',
+                                Duration(milliseconds: 2000),
+                                () => setState(() {}),
                               ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(
-                                color: Color(0x00000000),
-                                width: 1,
+                              autofocus: true,
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                labelText: 'Email',
+                                enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                focusedBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(
+                                    color: Color(0x00000000),
+                                    width: 1,
+                                  ),
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                                filled: true,
+                                fillColor: Color(0xFFF1F1F1),
+                                prefixIcon: Icon(
+                                  Icons.mail,
+                                  color: FlutterFlowTheme.of(context)
+                                      .secondaryText,
+                                  size: 18,
+                                ),
                               ),
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                            filled: true,
-                            fillColor: Color(0xFFF1F1F1),
-                            prefixIcon: Icon(
-                              Icons.mail,
-                              color: FlutterFlowTheme.of(context).secondaryText,
-                              size: 18,
-                            ),
-                          ),
-                          style:
-                              FlutterFlowTheme.of(context).bodyText1.override(
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
                                     fontFamily: 'Urbanist',
                                     lineHeight: 2,
                                   ),
+                            );
+                          },
                         ),
                       ),
                     ),
@@ -145,9 +194,9 @@ class _SignInWidgetState extends State<SignInWidget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(10, 0, 10, 0),
                         child: TextFormField(
-                          controller: textController2,
+                          controller: passwordTextController,
                           onChanged: (_) => EasyDebounce.debounce(
-                            'textController2',
+                            'passwordTextController',
                             Duration(milliseconds: 2000),
                             () => setState(() {}),
                           ),
@@ -155,7 +204,6 @@ class _SignInWidgetState extends State<SignInWidget> {
                           obscureText: !passwordVisibility,
                           decoration: InputDecoration(
                             labelText: 'Password',
-                            hintText: '[',
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(
                                 color: Color(0x00000000),
@@ -203,9 +251,10 @@ class _SignInWidgetState extends State<SignInWidget> {
                 ),
               ),
               Padding(
-                padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
+                padding: EdgeInsetsDirectional.fromSTEB(20, 20, 20, 0),
                 child: Row(
-                  mainAxisSize: MainAxisSize.min,
+                  mainAxisSize: MainAxisSize.max,
+                  mainAxisAlignment: MainAxisAlignment.start,
                   children: [
                     StreamBuilder<UserRecord>(
                       stream: UserRecord.getDocument(currentUserReference),
@@ -254,14 +303,57 @@ class _SignInWidgetState extends State<SignInWidget> {
                             fontWeight: FontWeight.w600,
                           ),
                     ),
+                    Padding(
+                      padding: EdgeInsetsDirectional.fromSTEB(80, 0, 0, 0),
+                      child: Row(
+                        mainAxisSize: MainAxisSize.max,
+                        children: [
+                          InkWell(
+                            onTap: () async {
+                              context.pushNamed(
+                                'forgot_password',
+                                extra: <String, dynamic>{
+                                  kTransitionInfoKey: TransitionInfo(
+                                    hasTransition: true,
+                                    transitionType: PageTransitionType.fade,
+                                    duration: Duration(milliseconds: 0),
+                                  ),
+                                },
+                              );
+                            },
+                            child: Text(
+                              'Forgot Password?',
+                              style: FlutterFlowTheme.of(context)
+                                  .bodyText1
+                                  .override(
+                                    fontFamily: 'Urbanist',
+                                    color: Color(0xFF476EBE),
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 20, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    GoRouter.of(context).prepareAuthEvent();
+
+                    final user = await signInWithEmail(
+                      context,
+                      emailTextController.text,
+                      passwordTextController.text,
+                    );
+                    if (user == null) {
+                      return;
+                    }
+
+                    context.goNamedAuth('home', mounted);
                   },
                   text: 'Sign in',
                   options: FFButtonOptions(
@@ -433,13 +525,27 @@ class _SignInWidgetState extends State<SignInWidget> {
                       'Already have an account? ',
                       style: FlutterFlowTheme.of(context).bodyText1,
                     ),
-                    Text(
-                      'Sign up',
-                      style: FlutterFlowTheme.of(context).bodyText1.override(
-                            fontFamily: 'Urbanist',
-                            color: FlutterFlowTheme.of(context).primaryColor,
-                            fontWeight: FontWeight.w600,
-                          ),
+                    InkWell(
+                      onTap: () async {
+                        context.pushNamed(
+                          'sign_up',
+                          extra: <String, dynamic>{
+                            kTransitionInfoKey: TransitionInfo(
+                              hasTransition: true,
+                              transitionType: PageTransitionType.fade,
+                              duration: Duration(milliseconds: 0),
+                            ),
+                          },
+                        );
+                      },
+                      child: Text(
+                        'Sign up',
+                        style: FlutterFlowTheme.of(context).bodyText1.override(
+                              fontFamily: 'Urbanist',
+                              color: FlutterFlowTheme.of(context).primaryColor,
+                              fontWeight: FontWeight.w600,
+                            ),
+                      ),
                     ),
                   ],
                 ),

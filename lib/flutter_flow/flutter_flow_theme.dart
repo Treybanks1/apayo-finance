@@ -87,18 +87,18 @@ class LightModeTheme extends FlutterFlowTheme {
   Color secondaryColor = const Color(0xFFFFD300);
   Color tertiaryColor = const Color(0xFF476EBE);
   Color alternate = const Color(0xFFFF3F4A);
-  Color primaryBackground = const Color(0xFFE5E5E5);
-  Color secondaryBackground = const Color(0xFFFFFFFF);
+  Color primaryBackground = const Color(0xFFFFFFFF);
+  Color secondaryBackground = const Color(0xFFEEEEEE);
   Color primaryText = const Color(0xFF101213);
   Color secondaryText = const Color(0xFF57636C);
 }
 
 class DarkModeTheme extends FlutterFlowTheme {
-  Color primaryColor = const Color(0xFF4B39EF);
-  Color secondaryColor = const Color(0xFF39D2C0);
-  Color tertiaryColor = const Color(0xFFEE8B60);
+  Color primaryColor = const Color(0xFF246BFD);
+  Color secondaryColor = const Color(0xFFFFD300);
+  Color tertiaryColor = const Color(0xFF476EBE);
   Color alternate = const Color(0xFFFF5963);
-  Color primaryBackground = const Color(0xFF1A1F24);
+  Color primaryBackground = const Color(0xFF1F222A);
   Color secondaryBackground = const Color(0xFF101213);
   Color primaryText = const Color(0xFFFFFFFF);
   Color secondaryText = const Color(0xFF95A1AC);

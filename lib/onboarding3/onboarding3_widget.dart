@@ -60,7 +60,7 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
                       child: Padding(
                         padding: EdgeInsetsDirectional.fromSTEB(20, 0, 20, 0),
                         child: Text(
-                          'Have an amazing experience with AllPay right now!',
+                          'Have an amazing experience with Apayo right now!',
                           textAlign: TextAlign.center,
                           style: FlutterFlowTheme.of(context).title1.override(
                                 fontFamily: 'Urbanist',
@@ -75,8 +75,17 @@ class _Onboarding3WidgetState extends State<Onboarding3Widget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed(
+                      'sign_up',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 500),
+                        ),
+                      },
+                    );
                   },
                   text: 'Get Started',
                   options: FFButtonOptions(

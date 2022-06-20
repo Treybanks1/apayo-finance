@@ -7,3 +7,5 @@ export 'sign_up/sign_up_widget.dart' show SignUpWidget;
 export 'sign_in/sign_in_widget.dart' show SignInWidget;
 export 'forgot_password/forgot_password_widget.dart' show ForgotPasswordWidget;
 export 'home/home_widget.dart' show HomeWidget;
+export 'profile/profile_widget.dart' show ProfileWidget;
+export 'editprofile/editprofile_widget.dart' show EditprofileWidget;

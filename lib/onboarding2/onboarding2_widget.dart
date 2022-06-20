@@ -75,8 +75,17 @@ class _Onboarding2WidgetState extends State<Onboarding2Widget> {
               Padding(
                 padding: EdgeInsetsDirectional.fromSTEB(0, 50, 0, 0),
                 child: FFButtonWidget(
-                  onPressed: () {
-                    print('Button pressed ...');
+                  onPressed: () async {
+                    context.pushNamed(
+                      'Onboarding3',
+                      extra: <String, dynamic>{
+                        kTransitionInfoKey: TransitionInfo(
+                          hasTransition: true,
+                          transitionType: PageTransitionType.fade,
+                          duration: Duration(milliseconds: 500),
+                        ),
+                      },
+                    );
                   },
                   text: 'Next',
                   options: FFButtonOptions(
